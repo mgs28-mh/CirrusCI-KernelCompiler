@@ -1,0 +1,17 @@
+env:
+    token: "5590721849:AAFTADPS6yLQco8hpmQj0R13HY2Y2eyyAYI"
+    chat_id: "-1001687609050"
+    
+task:
+  name: "Kernel deploy.."
+  timeout_in: 120m
+  container:
+      image: nexgang/ubuntu:latest
+      cpu: 4
+      memory: 16G
+      stateful: true
+      greedy: true
+
+  Build_script:
+      - git clone --depth=1 -b a12/temp https://github.com/mgs28-mh/kernel_xiaomi_ulysse-4.9 ulysse && cd ulysse
+      - /noclone3 bash build.sh
