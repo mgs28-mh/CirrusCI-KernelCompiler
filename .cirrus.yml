@@ -1,6 +1,6 @@
 env:
-    token: "5590721849:AAFTADPS6yLQco8hpmQj0R13HY2Y2eyyAYI"
-    chat_id: "-1001687609050"
+    token: "ENCRYPTED[!d1450ef7915aaba23ea16e5b9531d53d69342306308fd9d9c48dd4abe682a284ec2ef6e8b71b814a33f931e7d683a31a!]"
+    chat_id: "ENCRYPTED[!dd8085ba2c475ca33b34b96ddae112c348c79719998740cd93d915aba3a4f83eea590ac6e85bd16bbe3c858583ae7fb3!]"
     
 task:
   name: "Kernel deploy.."
