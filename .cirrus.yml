@@ -14,4 +14,4 @@ task:
 
   Build_script:
       - git clone --depth=1 -b a12/temp https://github.com/mgs28-mh/kernel_xiaomi_ulysse-4.9 ulysse && cd ulysse
-      - ./noclone3 bash build.sh
+      - bash build.sh --gabuters
