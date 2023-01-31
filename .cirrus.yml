@@ -13,5 +13,4 @@ task:
       greedy: true
 
   Build_script:
-      - git clone --depth=1 -b a12/temp https://github.com/mgs28-mh/kernel_xiaomi_ulysse-4.9 ulysse && cd ulysse
-      - bash build.sh --gabuters
+      - bash kernel_build.sh
