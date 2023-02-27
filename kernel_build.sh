@@ -48,10 +48,9 @@ echo ================================================
 }
 
 # Telegram
-export BOT_MSG_URL="https://api.telegram.org/bot$token/sendMessage"
-
 tg_post_msg() {
-  curl -s -X POST "$BOT_MSG_URL" -d chat_id="$chat_id" \
+  curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" \
+  -d chat_id="$chat_id" \
   -d "disable_web_page_preview=true" \
   -d "parse_mode=html" \
   -d text="$1"
