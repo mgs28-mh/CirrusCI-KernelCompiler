@@ -47,8 +47,8 @@ echo KERNEL_ROOTDIR = ${KERNEL_ROOTDIR}
 echo ================================================
 }
 
-# Telegram
-tg_post_msg() {
+# Telegram Bot Integration
+function tg_post_msg() {
   curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" \
   -d chat_id="$chat_id" \
   -d "disable_web_page_preview=true" \
@@ -57,11 +57,10 @@ tg_post_msg() {
 
 }
 
+# Compilation
+function compile() {
 # Post Main Information
 tg_post_msg "<b>CI Build Triggered</b>%0A<b>Docker OS : </b><code>${DISTRO}</code>%0A<b>Host Core Count : </b><code>${PROCS}</code>%0A</b>Builder Name : </b><code>${KBUILD_BUILD_USER}</code>%0A</b>Builder Host : </b><code>${KBUILD_BUILD_HOST}</code>%0A</b>Device Defconfig : </b><code>${DEVICE_DEFCONFIG}</code>%0A</b>Clang Version : </b><code>${KBUILD_COMPILER_STRING}</code>%0A</b>Clang Rootdir : </b><code>${CLANG_ROOTDIR}</code>%0A</b>Kernel Rootdir : </b><code>${KERNEL_ROOTDIR}</code>"
-
-# Compile
-compile(){
 tg_post_msg "<b>CI Build Triggered : </b><code>Compilation has started</code>"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
