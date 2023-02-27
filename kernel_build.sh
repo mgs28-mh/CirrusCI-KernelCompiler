@@ -25,6 +25,7 @@ CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(ht
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
 IMAGE=$(pwd)/ulysse/out/arch/arm64/boot/Image.gz-dtb
+VERBOSE=0
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 
@@ -32,9 +33,11 @@ START=$(date +"%s")
 # Warning !! Dont Change anything there without known reason.
 function check() {
 echo ================================================
-echo xKernelCompiler
-echo version : rev1.5 - gaspoll
+echo CI Build Triggered
+echo version : rev2.0 - gaspoll
 echo ================================================
+echo DOCKER OS = ${DISTRO}
+echo HOST CORE COUNT = ${PROCS}
 echo BUILDER NAME = ${KBUILD_BUILD_USER}
 echo BUILDER HOSTNAME = ${KBUILD_BUILD_HOST}
 echo DEVICE_DEFCONFIG = ${DEVICE_DEFCONFIG}
@@ -56,7 +59,7 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>CI Build Triggered</b>%0A<b>Docker OS : </b><code>$DISTRO</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A</b>Builder Name : </b><code>${KBUILD_BUILD_USER}</code>%0A</b>Builder Host : </b><code>${KBUILD_BUILD_HOST}</code>%0A</b>Device Defconfig : </b><code>${DEVICE_DEFCONFIG}</code>%0A</b>Clang Version : </b><code>${KBUILD_COMPILER_STRING}</code>%0A</b>Clang Rootdir : </b><code>${CLANG_ROOTDIR}</code>%0A</b>Kernel Rootdir : </b><code>${KERNEL_ROOTDIR}</code>"
+tg_post_msg "<b>CI Build Triggered</b>%0A<b>Docker OS : </b><code>${DISTRO}</code>%0A<b>Host Core Count : </b><code>${PROCS}</code>%0A</b>Builder Name : </b><code>${KBUILD_BUILD_USER}</code>%0A</b>Builder Host : </b><code>${KBUILD_BUILD_HOST}</code>%0A</b>Device Defconfig : </b><code>${DEVICE_DEFCONFIG}</code>%0A</b>Clang Version : </b><code>${KBUILD_COMPILER_STRING}</code>%0A</b>Clang Rootdir : </b><code>${CLANG_ROOTDIR}</code>%0A</b>Kernel Rootdir : </b><code>${KERNEL_ROOTDIR}</code>"
 
 # Compile
 compile(){
@@ -79,7 +82,7 @@ make -j$(nproc) ARCH=arm64 O=out \
 	  push "error.log" "Build Throws Errors"
 	  exit 1
       else
-          post_msg " Kernel Compilation Finished. Started Zipping "
+          tg_post_msg " Kernel Compilation Finished. Started Zipping "
    fi
 
   git clone --depth=1 https://github.com/ZilverQueen/AnyKernel3.git AnyKernel
@@ -101,7 +104,7 @@ function push() {
 function zipping() {
     cd AnyKernel || exit 1
     zip -r9 Kernel-Archipelago-ulysse-${DATE}.zip *
-    MD5CHECK=$(md5sum "$FINAL_ZIP" | cut -d' ' -f1)
+    MD5CHECK=$(md5sum "Kernel-Archipelago-ulysse-${DATE}.zip" | cut -d' ' -f1)
     cd ..
 }
 check
