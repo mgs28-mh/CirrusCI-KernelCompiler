@@ -8,7 +8,7 @@
 
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
-git clone --depth=1 https://github.com/mgs28-mh/kernel_xiaomi_ulysse-4.9.git -b a12/temp ulysse
+git clone --depth=1 https://github.com/mgs28-mh/kernel_xiaomi_ulysse-4.9.git -b a13/past ulysse
 git clone --depth=1 https://github.com/Gabuters-Dev/gabuters-clang -b master GABUTERSxTC
 
 # Main Declaration
