@@ -11,13 +11,13 @@ KERNEL_DIR="$(pwd)"
 ##----------------------------------------------------------##
 # Device Name and Model
 MODEL=Xiaomi
-DEVICE=ulysse
+DEVICE=fog
 
 # Kernel Version Code
 VERSION=latest
 
 # Kernel Defconfig
-DEFCONFIG=ulysse_defconfig
+DEFCONFIG=fog-perf_defconfig
 
 # Files
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
