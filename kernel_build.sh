@@ -34,7 +34,7 @@ START=$(date +"%s")
 function check() {
 echo ================================================
 echo CI Build Triggered
-echo version : rev2.0 - gaspoll
+echo version : rev2.0 - gaspolll
 echo ================================================
 echo DOCKER OS = ${DISTRO}
 echo HOST CORE COUNT = ${PROCS}
