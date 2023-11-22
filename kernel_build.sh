@@ -8,12 +8,12 @@
 
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
-git clone --depth=1 https://github.com/mgs28-mh/kernel_xiaomi_ulysse-4.9.git -b a12/temp ulysse
+git clone --depth=1 https://github.com/mgs28-mh/Sea_Kernel-Fog ulysse
 git clone --depth=1 https://github.com/Gabuters-Dev/gabuters-clang -b master GABUTERSxTC
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/ulysse # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_DEFCONFIG=ulysse_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+DEVICE_DEFCONFIG=fog-perf_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/GABUTERSxTC # IMPORTANT! Put your clang directory here.
 export KBUILD_BUILD_USER=nobody # Change with your own name or else.
 export KBUILD_BUILD_HOST=Gabuters-dev # Change with your own hostname.
@@ -83,7 +83,7 @@ make -j$(nproc) ARCH=arm64 O=out \
           tg_post_msg " Kernel Compilation Finished. Started Zipping "
    fi
 
-  git clone --depth=1 https://github.com/ZilverQueen/AnyKernel3.git AnyKernel
+  git clone --depth=1 https://github.com/Kentanglu/AnyKernel3-680 AnyKernel
 	cp $IMAGE AnyKernel
 }
 
@@ -102,7 +102,7 @@ function push() {
 function zipping() {
     cd AnyKernel || exit 1
     zip -r9 Kernel-Archipelago-ulysse-${DATE}.zip *
-    MD5CHECK=$(md5sum "Kernel-Archipelago-ulysse-${DATE}.zip" | cut -d' ' -f1)
+    MD5CHECK=$(md5sum "Kernel-Archipelago-fog-${DATE}.zip" | cut -d' ' -f1)
     cd ..
 }
 check
